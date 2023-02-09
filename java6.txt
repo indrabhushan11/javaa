@@ -1,0 +1,81 @@
+HelloWorld.java
+
+package com.durgesh;
+
+public class HelloWorld {
+
+	private String message;
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	@Override
+	public String toString() {
+		return "HelloWorld [message=" + message + "]";
+	}
+	
+}
+
+
+
+
+
+
+HelloWorldConfig.java
+
+
+package com.durgesh;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class HelloWorldConfig
+{
+
+	@Bean
+	public HelloWorld helloWorld()
+	{
+		System.out.println("java Based Configuration");
+		return new HelloWorld();
+	}
+}
+
+
+
+
+
+MainApp.java
+
+
+package com.durgesh;
+
+// Lab Program -06
+import java.util.Scanner;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class MainApp 
+{
+	public static void main(String[] args) {
+		ApplicationContext context =new ApplicationContext(HelloWorldConfig.class);
+		
+		HelloWorld s1=(HelloWorld)context.getBean(HelloWorld.class);
+		System.out.println(s1);
+		
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Can you tell your message:");
+		String str=sc.nextLine();
+		s1.setMessage(str);
+		System.out.println("Your Message is:");
+		System.out.println(s1.getMessage());
+		
+	}
+
+}

@@ -1,0 +1,100 @@
+StudentBean2.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+               
+               
+     <bean class="com.durgesh.Student" name="student" >
+     <property name="name" value="Durgesh" />
+     <property name="usn" value="1RV20MC015" />
+     <property name="address" value="Bhagalpur" />
+     <property name="fee" value="50000" />
+     </bean>
+     
+     <!-- Second way -->
+     <bean class="com.durgesh.Student" name="student2"  p:name="Aman" p:usn="1RV20MC099" p:address="Patna" p:fee="60000"/>
+ 
+</beans>
+
+
+Student.java
+
+package com.durgesh;
+
+public class Student 
+{
+	
+	private String name;
+	private String usn;
+	private String address;
+	private int fee;
+
+	
+	public int getFee() {
+		return fee;
+	}
+
+	public void setFee(int fee) {
+		this.fee = fee;
+	}
+
+	public String getUsn() {
+		return usn;
+	}
+
+	public void setUsn(String usn) {
+		this.usn = usn;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", usn=" + usn + ", address=" + address + ", fee=" + fee + "]";
+	}
+}
+
+
+
+AppTest.java
+
+package com.durgesh;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+// Lab Program-05
+public class AppTest 
+{
+	public static void main(String[] args) {
+		ApplicationContext context =new ClassPathXmlApplicationContext("com/durgesh/StudentBean2.xml");
+		
+		Student s1=(Student)context.getBean("student");
+		System.out.println(s1);
+		
+		Student s2=(Student)context.getBean("student2");
+		System.out.println(s2);
+	}
+
+}
+
+
